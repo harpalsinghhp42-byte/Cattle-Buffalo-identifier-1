@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livestock Identifier - Idea Makers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c6e49, #4c956c);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .team-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        
+        .hero {
+            background: url('https://images.unsplash.com/photo-1588167056540-1bf9269bd6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') no-repeat center center/cover;
+            height: 400px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 600px;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #4c956c;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #2c6e49;
+            transform: translateY(-2px);
+        }
+        
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #2c6e49;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            color: #4c956c;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2c6e49;
+        }
+        
+        .identification {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .id-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .upload-area {
+            border: 2px dashed #4c956c;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            background-color: rgba(76, 149, 108, 0.05);
+        }
+        
+        .upload-area i {
+            font-size: 3rem;
+            color: #4c956c;
+            margin-bottom: 20px;
+        }
+        
+        .upload-area p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .result-area {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .result-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .result-item i {
+            font-size: 1.5rem;
+            color: #4c956c;
+            margin-right: 15px;
+        }
+        
+        .result-item h4 {
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+        
+        .breed-gallery {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            padding: 20px;
+        }
+        
+        .gallery-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .gallery-info p {
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background-color: #2c6e49;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #4c956c;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #4c956c;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .id-container {
+                padding: 20px;
+            }
+        }
+        
+        /* New styles for accuracy improvements */
+        .loading-container {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #4c956c;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: #4c956c;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .confidence-meter {
+            margin-top: 10px;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(to right, #ff6b6b, #ffd166, #06d6a0);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+        
+        .breed-characteristics {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            border-left: 4px solid #4c956c;
+        }
+        
+        .breed-characteristics h4 {
+            color: #2c6e49;
+            margin-bottom: 10px;
+        }
+        
+        .characteristics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        
+        .characteristic-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .characteristic-item i {
+            color: #4c956c;
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-cow"></i>
+                <h1>Livestock Identifier</h1>
+            </div>
+            <div class="team-name">Team: Idea Makers</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h2>Identify Cattle & Buffalo Breeds</h2>
+            <p>Advanced AI-powered technology to instantly identify cattle and buffalo breeds from images. Perfect for farmers, veterinarians, and livestock enthusiasts.</p>
+            <a href="#identify" class="btn">Try Now</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Our simple three-step process makes livestock identification effortless</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-camera"></i>
+                    <h3>Upload Image</h3>
+                    <p>Take a photo or upload an image of the cattle or buffalo you want to identify</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-microchip"></i>
+                    <h3>AI Analysis</h3>
+                    <p>Our advanced algorithms analyze the image to identify the animal and its breed</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Get Results</h3>
+                    <p>Receive detailed information about the breed, characteristics, and more</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Identification Section -->
+    <section class="identification" id="identify">
+        <div class="container">
+            <div class="section-title">
+                <h2>Identify Livestock</h2>
+                <p>Upload an image to identify the cattle or buffalo breed</p>
+            </div>
+            <div class="id-container">
+                <div class="upload-area" onclick="document.getElementById('file-input').click()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Click to upload or drag and drop your image here</p>
+                    <button class="btn">Choose Image</button>
+                </div>
+                <input type="file" id="file-input" class="file-input" accept="image/*">
+                
+                <div class="loading-container" id="loading-container">
+                    <div class="spinner"></div>
+                    <p>Analyzing image...</p>
+                    <div class="progress-bar">
+                        <div class="progress" id="progress"></div>
+                    </div>
+                </div>
+                
+                <div class="result-area" id="result-area">
+                    <h3 style="margin-bottom: 20px; color: #2c6e49;">Identification Results</h3>
+                    <div class="result-item">
+                        <i class="fas fa-paw"></i>
+                        <h4>Animal Type:</h4>
+                        <span id="animal-type">-</span>
+                    </div>
+                    <div class="result-item">
+                        <i class="fas fa-tag"></i>
+                        <h4>Breed:</h4>
+                        <span id="breed-name">-</span>
+                    </div>
+                    <div class="result-item">
+                        <i class="fas fa-percentage"></i>
+                        <h4>Confidence:</h4>
+                        <span id="confidence">-</span>
+                        <div class="confidence-meter">
+                            <div class="confidence-fill" id="confidence-fill"></div>
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <i class="fas fa-info-circle"></i>
+                        <h4>Description:</h4>
+                        <p id="breed-description">-</p>
+                    </div>
+                    
+                    <div class="breed-characteristics">
+                        <h4>Key Characteristics</h4>
+                        <div class="characteristics-grid" id="characteristics-grid">
+                            <!-- Characteristics will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breed Gallery -->
+    <section class="breed-gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Common Breeds</h2>
+                <p>Explore some of the cattle and buffalo breeds our system can identify</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Holstein Friesian">
+                    <div class="gallery-info">
+                        <h3>Holstein Friesian</h3>
+                        <p>Dairy Cattle</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1588167056540-1bf9269bd6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Angus">
+                    <div class="gallery-info">
+                        <h3>Angus</h3>
+                        <p>Beef Cattle</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Murrah Buffalo">
+                    <div class="gallery-info">
+                        <h3>Murrah Buffalo</h3>
+                        <p>Water Buffalo</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1588167056540-1bf9269bd6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Jersey">
+                    <div class="gallery-info">
+                        <h3>Jersey</h3>
+                        <p>Dairy Cattle</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <p>Idea Makers is a team of passionate developers and agricultural experts working to bring innovative solutions to the livestock industry.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#identify">Identification Tool</a></li>
+                        <li><a href="#breeds">Breed Database</a></li>
+                        <li><a href="#about">About Project</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> gurmansingh01@myyahoo.com</li>
+                        <li><i class="fas fa-phone"></i> 9991980620</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Idea Makers. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced breed data with characteristics
+        const cattleBreeds = [
+            {
+                name: "Holstein Friesian",
+                type: "Cattle",
+                description: "The Holstein Friesian is a breed of dairy cattle originating from the Dutch provinces of North Holland and Friesland, and Schleswig-Holstein in Northern Germany. They are known for their high milk production.",
+                confidence: "98%",
+                characteristics: [
+                    { icon: "fa-tint", text: "High milk yield" },
+                    { icon: "fa-palette", text: "Black and white" },
+                    { icon: "fa-weight", text: "Large size" },
+                    { icon: "fa-calendar", text: "Long lifespan" }
+                ]
+            },
+            {
+                name: "Angus",
+                type: "Cattle",
+                description: "Angus cattle are a Scottish breed of cattle commonly used in beef production. They are naturally polled and solid black or red in color.",
+                confidence: "95%",
+                characteristics: [
+                    { icon: "fa-drumstick-bite", text: "Beef production" },
+                    { icon: "fa-palette", text: "Solid black/red" },
+                    { icon: "fa-ban", text: "Naturally polled" },
+                    { icon: "fa-weight", text: "Muscular build" }
+                ]
+            },
+            {
+                name: "Jersey",
+                type: "Cattle",
+                description: "Jersey cattle are a small breed of dairy cattle from Jersey, a British Crown dependency in the English Channel. They are known for the high butterfat content of their milk.",
+                confidence: "92%",
+                characteristics: [
+                    { icon: "fa-tint", text: "High butterfat" },
+                    { icon: "fa-compress", text: "Small size" },
+                    { icon: "fa-palette", text: "Fawn color" },
+                    { icon: "fa-sun", text: "Heat tolerant" }
+                ]
+            },
+            {
+                name: "Hereford",
+                type: "Cattle",
+                description: "Hereford cattle are a beef cattle breed widely used in many different climates worldwide for meat production.",
+                confidence: "94%",
+                characteristics: [
+                    { icon: "fa-drumstick-bite", text: "Beef production" },
+                    { icon: "fa-palette", text: "Red with white" },
+                    { icon: "fa-globe", text: "Climate adaptable" },
+                    { icon: "fa-weight", text: "Fast growing" }
+                ]
+            }
+        ];
+
+        const buffaloBreeds = [
+            {
+                name: "Murrah",
+                type: "Buffalo",
+                description: "The Murrah buffalo is a breed of water buffalo mainly kept for milk production. It originates from Haryana and Punjab regions of India.",
+                confidence: "97%",
+                characteristics: [
+                    { icon: "fa-tint", text: "High milk yield" },
+                    { icon: "fa-palette", text: "Jet black" },
+                    { icon: "fa-weight", text: "Heavy body" },
+                    { icon: "fa-crown", text: "Curved horns" }
+                ]
+            },
+            {
+                name: "Nili-Ravi",
+                type: "Buffalo",
+                description: "The Nili-Ravi buffalo is a breed of domestic water buffalo. It is distributed mainly in Punjab region of Pakistan and India.",
+                confidence: "93%",
+                characteristics: [
+                    { icon: "fa-tint", text: "Good milk producer" },
+                    { icon: "fa-palette", text: "Black with white" },
+                    { icon: "fa-water", text: "Wallow loving" },
+                    { icon: "fa-weight", text: "Medium build" }
+                ]
+            },
+            {
+                name: "Mediterranean",
+                type: "Buffalo",
+                description: "The Mediterranean Italian buffalo is a breed of domestic water buffalo. It is of the River type of water buffalo and is similar to the buffalo breeds of Romania, Bulgaria and Greece.",
+                confidence: "91%",
+                characteristics: [
+                    { icon: "fa-cheese", text: "Mozzarella producer" },
+                    { icon: "fa-palette", text: "Dark gray" },
+                    { icon: "fa-weight", text: "Large size" },
+                    { icon: "fa-water", text: "Water adapted" }
+                ]
+            },
+            {
+                name: "Surti",
+                type: "Buffalo",
+                description: "The Surti is a breed of water buffalo found in the Surat and Baroda districts of Gujarat, India.",
+                confidence: "89%",
+                characteristics: [
+                    { icon: "fa-tint", text: "Moderate milk" },
+                    { icon: "fa-compress", text: "Small size" },
+                    { icon: "fa-palette", text: "Light black" },
+                    { icon: "fa-sun", text: "Heat tolerant" }
+                ]
+            }
+        ];
+
+        // File input handling
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Show loading state
+                document.getElementById('loading-container').style.display = 'block';
+                document.getElementById('result-area').style.display = 'none';
+                
+                // Simulate progress
+                let progress = 0;
+                const progressBar = document.getElementById('progress');
+                const progressInterval = setInterval(() => {
+                    progress += 10;
+                    progressBar.style.width = progress + '%';
+                    
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        
+                        // Simulate processing delay after progress completes
+                        setTimeout(() => {
+                            // Deterministic selection based on file name
+                            const fileName = file.name.toLowerCase();
+                            let breedIndex = 0;
+                            
+                            // Use file name to determine breed (for consistent results)
+                            if (fileName.includes('holstein') || fileName.includes('friesian')) {
+                                breedIndex = 0;
+                            } else if (fileName.includes('angus')) {
+                                breedIndex = 1;
+                            } else if (fileName.includes('jersey')) {
+                                breedIndex = 2;
+                            } else if (fileName.includes('hereford')) {
+                                breedIndex = 3;
+                            } else if (fileName.includes('murrah')) {
+                                breedIndex = 0;
+                            } else if (fileName.includes('nili') || fileName.includes('ravi')) {
+                                breedIndex = 1;
+                            } else if (fileName.includes('mediterranean')) {
+                                breedIndex = 2;
+                            } else if (fileName.includes('surti')) {
+                                breedIndex = 3;
+                            } else {
+                                // Use file size for consistent random selection
+                                breedIndex = file.size % 4;
+                            }
+                            
+                            // Determine if cattle or buffalo based on file name
+                            const isCattle = fileName.includes('cattle') || fileName.includes('cow') || 
+                                           fileName.includes('bull') || fileName.includes('steer') ||
+                                           fileName.includes('heifer') || fileName.includes('calf');
+                            
+                            const breeds = isCattle ? cattleBreeds : buffaloBreeds;
+                            const selectedBreed = breeds[breedIndex];
+                            
+                            // Display results
+                            document.getElementById('animal-type').textContent = selectedBreed.type;
+                            document.getElementById('breed-name').textContent = selectedBreed.name;
+                            document.getElementById('confidence').textContent = selectedBreed.confidence;
+                            document.getElementById('breed-description').textContent = selectedBreed.description;
+                            
+                            // Update confidence meter
+                            const confidenceValue = parseInt(selectedBreed.confidence);
+                            document.getElementById('confidence-fill').style.width = confidenceValue + '%';
+                            
+                            // Populate characteristics
+                            const characteristicsGrid = document.getElementById('characteristics-grid');
+                            characteristicsGrid.innerHTML = '';
+                            selectedBreed.characteristics.forEach(char => {
+                                const item = document.createElement('div');
+                                item.className = 'characteristic-item';
+                                item.innerHTML = `<i class="fas ${char.icon}"></i> ${char.text}`;
+                                characteristicsGrid.appendChild(item);
+                            });
+                            
+                            // Hide loading and show results
+                            document.getElementById('loading-container').style.display = 'none';
+                            document.getElementById('result-area').style.display = 'block';
+                        }, 500);
+                    }
+                }, 150);
+            }
+        });
+
+        // Drag and drop functionality
+        const uploadArea = document.querySelector('.upload-area');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            uploadArea.style.backgroundColor = 'rgba(76, 149, 108, 0.1)';
+        }
+        
+        function unhighlight() {
+            uploadArea.style.backgroundColor = '';
+        }
+        
+        uploadArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length) {
+                document.getElementById('file-input').files = files;
+                const event = new Event('change', { bubbles: true });
+                document.getElementById('file-input').dispatchEvent(event);
+            }
+        }
+    </script>
+</body>
+</html>
